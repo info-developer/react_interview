@@ -1,5 +1,144 @@
 ## React Interview
 
+### **What is component-driven development and why to use it**
+
+Making reusable components and useing it multiple places
+
+### **React Hooks**
+
+Hooks allow function components to have access to state and other React features. Because of this, class components are generally no longer needed.
+
+* The React <b>useState</b> Hook allows us to track state in a function component.State generally refers to data or properties that need to be tracking in an application.
+
+```js
+import { useState } from "react";
+const [color, setColor] = useState("");
+```
+
+* The <b>useEffect</b> Hook allows you to perform side effects in your components.Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+
+```js
+  useEffect(<function>, <dependency>)
+```
+```js
+  useEffect(() => {
+    setCalculation(() => count * 2);
+  }, [count]);
+```
+Effect Cleanup: Some effects require cleanup to reduce memory leaks.
+
+```js
+  useEffect(() => {
+    let timer = setTimeout(() => {
+    setCount((count) => count + 1);
+  }, 1000);
+
+  return () => clearTimeout(timer)
+  }, []);
+  ```
+
+
+* React <b>Context</b> is a way to manage state globally.It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.State should be held by the highest parent component in the stack that requires access to the state.To illustrate, we have many nested components. The component at the top and bottom of the stack need access to the state.To do this without Context, we will need to pass the state as "props" through each nested component. This is called <b>prop drilling</b>.
+
+```js
+import { useState, createContext } from "react";
+const UserContext = createContext()
+
+function Component1() {
+  const [user, setUser] = useState("Jesse Hall");
+
+  return (
+    <UserContext.Provider value={user}>
+      <h1>{`Hello ${user}!`}</h1>
+      <Component2 user={user} />
+    </UserContext.Provider>
+  );
+}
+
+import { useState, createContext, useContext } from "react";
+function Component5() {
+  const user = useContext(UserContext);
+
+  return (
+    <>
+      <h1>Component 5</h1>
+      <h2>{`Hello ${user} again!`}</h2>
+    </>
+  );
+}
+```
+
+
+* The <b>useRef</b> Hook allows you to persist values between renders.
+<b>Does Not Cause Re-renders</b>
+
+```js
+import { useRef } from "react";
+import ReactDOM from "react-dom/client";
+
+function App() {
+  const inputElement = useRef();
+
+  const focusInput = () => {
+    inputElement.current.focus();
+  };
+
+  return (
+    <>
+      <input type="text" ref={inputElement} />
+      <button onClick={focusInput}>Focus Input</button>
+    </>
+  );
+}
+```
+
+It can be used to store a mutable value that does not cause a re-render when updated.
+It can be used to access a DOM element directly.
+
+* The <b>useReducer</b> Hook returns the current state and a dispatch method.useReducer is a React Hook that lets you add a reducer to your component.The dispatch function returned by useReducer lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the dispatch function:
+
+```js
+import { useReducer } from 'react';
+
+function reducer(state, action) {
+  if (action.type === 'incremented_age') {
+    return {
+      age: state.age + 1
+    };
+  }
+  throw Error('Unknown action.');
+}
+
+export default function Counter() {
+  const [state, dispatch] = useReducer(reducer, { age: 42 });
+
+  return (
+    <>
+      <button onClick={() => {
+        dispatch({ type: 'incremented_age' })
+      }}>
+        Increment age
+      </button>
+      <p>Hello! You are {state.age}.</p>
+    </>
+  );
+}
+```
+
+
+
+* The <b>useCallback</b> Hook only runs when one of its dependencies update.The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function.One reason to use useCallback is to prevent a component from re-rendering unless its props have changed.
+https://www.w3schools.com/react/react_usecallback.asp
+
+
+*The React <b>useMemo</b> Hook returns a memoized value.Think of memoization as caching a value so that it does not need to be recalculated.The useMemo Hook only runs when one of its dependencies update.
+
+### **React Custom Hooks**
+Hooks are reusable functions.
+
+When you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook
+
+
 ### **Why do we need webpack?**
 
 The motivations behind webpack is to gather all your dependencies, which includes not just code, but other assets as well, and generate a dependency graph. Bundlers are only prepared to handle JS files, so webpack needs to preprocess all the other files and assets before they get bundled
