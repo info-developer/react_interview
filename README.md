@@ -1,5 +1,7 @@
 ## React Interview
 
+https://react.dev/reference/react/cloneElement
+
 ### **What is component-driven development and why to use it**
 
 Making reusable components and useing it multiple places
@@ -140,7 +142,23 @@ Hooks are reusable functions.
 
 When you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook
 
-### **What is the use of  watchman in React**
+### **What are the differences between call() and put() in redux-saga?**
+
+`call()` is a blocking effect, which means that the saga will wait for promise resolving before moving on to the next step.
+
+`put()`, on the other hand, is a non-blocking effect, which means that the saga can continue to the next step and action will be dispatched within internal scheduler.
+
+### **Redux - Store**
+
+A store is a state container which holds the application’s state. Redux can have only a single store in your application. Whenever a store is created in Redux, you need to specify the reducer.
+
+### **What Is Redux-Saga**
+
+Redux-Saga basically is a middleware for your Redux
+
+### **Asynchronous in computer programming**
+
+In computer programming, asynchronous operation means that a process operates independently of other processes, whereas synchronous operation means that the process runs only as a result of some other process being completed or handed off
 
 ### **Why do we need webpack?**
 
