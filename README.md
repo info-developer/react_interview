@@ -133,11 +133,14 @@ https://www.w3schools.com/react/react_usecallback.asp
 
 *The React <b>useMemo</b> Hook returns a memoized value.Think of memoization as caching a value so that it does not need to be recalculated.The useMemo Hook only runs when one of its dependencies update.
 
+
+
 ### **React Custom Hooks**
 Hooks are reusable functions.
 
 When you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook
 
+### **What is the use of  watchman in React**
 
 ### **Why do we need webpack?**
 
