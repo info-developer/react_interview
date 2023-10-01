@@ -1,6 +1,18 @@
 ## React Interview
 
-NPM is a package manager used to install, delete, and update Javascript packages on your machine. NPX is a package executer, and it is used to execute javascript packages directly, without installing them
+### ESLint – Pluggable JavaScript linter
+
+Before getting into ESlint first you should be aware of linting. It is the process of checking the code for any errors. A Linter is an automated tool that runs on a static piece of code to find any kind of discrepancy arising due to formatting or due to bad coding practices. Running a Linting tool over the source code helps to improve the quality and readability of the code.
+
+ESLint: It is a JavaScript linting tool which is used for automatically detecting incorrect patterns found in ECMAScript/JavaScript code. It is used with the purpose of improving code quality, making code more consistent, and avoiding bugs. ESLint is written using Node.js to provide a fast runtime environment and easy installation via npm.
+The “ES” in ESLint stands for “EcmaScript”, which was created to standardize Javascript.
+
+### Introduction to Tailwind CSS
+
+
+
+
+### NPM is a package manager used to install, delete, and update Javascript packages on your machine. NPX is a package executer, and it is used to execute javascript packages directly, without installing them
 
 
 https://react.dev/reference/react/cloneElement
