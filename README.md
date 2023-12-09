@@ -1,5 +1,128 @@
 ## React Interview
 
+### Create React App
+
+```bash
+npx create-react-app myapp
+
+cd myapp
+
+npm install
+```
+Adding TypeScript
+
+```bash
+npx create-react-app myapp --template typescript
+```
+----------
+----------
+
+### Npm vs npx
+
+NPM is a package manager used to install, delete, and update Javascript packages on your machine. NPX is a package executer, and ***it is used to execute javascript packages directly, without installing them***
+
+----------
+----------
+
+### How React Works
+
+React basically maintains a tree. HTML code as a tree. In fact, that is exactly how the browser treats your DOM (your rendered HTML on the browser). ***React allows you to effectively re-construct your DOM in JavaScript** and push only those changes to the DOM which have actually occurred.
+
+First load ```public/index.html```
+
+```html
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+</body>
+```
+
+```src/index.js``` re-construct inside root div
+
+```js 
+import App from './App';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+Inside `App.js` all child component load based on routing urls
+
+----------
+----------
+
+
+
+### How react load index.html file from public directory
+
+All required files and folder already defined in file `node_modules/react-scripts/config/paths.js`
+
+```js
+module.exports = {
+  dotenv: resolveApp('.env'),
+  appPath: resolveApp('.'),
+  appBuild: resolveApp(buildPath),
+  appPublic: resolveApp('public'),
+  appHtml: resolveApp('public/index.html'),
+  appIndexJs: resolveModule(resolveApp, 'src/index'),
+  appPackageJson: resolveApp('package.json'),
+  appSrc: resolveApp('src'),
+  appTsConfig: resolveApp('tsconfig.json'),
+  appJsConfig: resolveApp('jsconfig.json'),
+```
+
+----------
+----------
+
+### **Why do we need webpack?**
+
+The motivations behind webpack is ***to gather all your dependencies**, which includes not just code, but other assets as well, and generate a dependency graph. Bundlers are only prepared to handle JS files, so webpack needs to preprocess all the other files and assets before they get bundled
+
+----------
+----------
+
+### **But why Babel?**
+
+it takes all the fancy javascript (react, newer ECMAScript features, typescript etc) and converts it to old school browser understandable javascript.
+
+----------
+----------
+
+### **Virtual DOM**
+
+The virtual DOM (VDOM) is a programming concept where an ideal, or **“virtual”, representation of a UI is kept in memory** and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation. ... They may also be considered a part of “virtual DOM” implementation in React.
+
+The Virtual DOM's Reconciliation Algorithm compares the virtual DOM to the actual DOM and determines the minimal set of changes needed to bring them into alignment.
+
+React uses a process called "reconciliation" to update the virtual DOM and actual DOM. When a component's state changes, React will compare the new virtual DOM with the previous virtual DOM, and it will determine the minimal set of changes needed to update the actual DOM
+
+----------
+----------
+
+
+### **Introducing JSX - React**
+
+JSX stands for JavaScript XML. **JSX allows us to write HTML in React**. JSX allows us to write HTML elements in JavaScript and place them in the DOM
+
+JSX is a JavaScript Extension Syntax used in React to easily write HTML and JavaScript together.
+
+``` js
+const myelement = <h1>I Love JSX!</h1>;
+
+ReactDOM.render(myelement, document.getElementById('root'));
+
+```
+
+### Why Keys Matter in React
+
+
+
 ### ESLint – Pluggable JavaScript linter
 
 Before getting into ESlint first you should be aware of linting. It is the process of checking the code for any errors. A Linter is an automated tool that runs on a static piece of code to find any kind of discrepancy arising due to formatting or due to bad coding practices. Running a Linting tool over the source code helps to improve the quality and readability of the code.
@@ -175,30 +298,7 @@ Redux-Saga basically is a middleware for your Redux
 
 In computer programming, asynchronous operation means that a process operates independently of other processes, whereas synchronous operation means that the process runs only as a result of some other process being completed or handed off
 
-### **Why do we need webpack?**
 
-The motivations behind webpack is to gather all your dependencies, which includes not just code, but other assets as well, and generate a dependency graph. Bundlers are only prepared to handle JS files, so webpack needs to preprocess all the other files and assets before they get bundled
-
-### **But why Babel?**
-
-it takes all the fancy javascript (react, newer ECMAScript features, typescript etc) and converts it to old school browser understandable javascript.
-
-### **Virtual DOM**
-
-The virtual DOM (VDOM) is a programming concept where an ideal, or **“virtual”, representation of a UI is kept in memory** and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation. ... They may also be considered a part of “virtual DOM” implementation in React.
-
-### **Introducing JSX - React**
-
-JSX stands for JavaScript XML. **JSX allows us to write HTML in React**. JSX allows us to write HTML elements in JavaScript and place them in the DOM
-
-JSX is a JavaScript Extension Syntax used in React to easily write HTML and JavaScript together.
-
-``` js
-const myelement = <h1>I Love JSX!</h1>;
-
-ReactDOM.render(myelement, document.getElementById('root'));
-
-```
 
 ### **ReactJS - Component Life Cycle**
 
