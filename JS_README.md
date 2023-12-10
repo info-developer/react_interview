@@ -373,6 +373,85 @@ we can do this
 
     https://rahmanfadhil.com/typescript-decorators/
 
+----------
+----------
+
+### Arrow Functions vs Regular Functions
+
+Arrow functions was ***introduced in ES6.*** And it introduced a simple and shorter way to create functions
+
+```js
+
+// REGULAR FUNCTION
+
+function multiply(num1, num2) {
+  const result = num1 * num2
+  return result
+}
+
+//ARROW FUNCTION
+
+const multiply = ((num1, num2) => {
+  return num1 * num2;
+})
+//OR
+
+const multiply = ((num1, num2)=>num1*num2);
+```
+
+* No arguments object in arrow functions
+  A normal function has an arguments object which you can access in the function
+  ```js
+    //
+    function print() {
+      console.log(arguments)
+    }
+    print(1); // OUTPUT: [Arguments] { '0': 1 }
+
+    -----------------------------------------------
+
+    const print = () => {
+      console.log(arguments)
+    }
+
+    print("hello", 400, false)
+    // Uncaught ReferenceError: arguments is not defined
+
+  ```
+
+* Arrow functions do not create their own this binding
+
+  In normal functions, a this variable is created which references the objects that call them
+
+  ```js
+  const obj  = {
+    name:"abc",
+    age:12,
+    print:function(){
+      console.log(this)
+    }
+  }
+
+   obj.print(); // { name: 'abc', age: 12, print: [Function: print] }
+
+   // IN ARROW FUNCTION
+
+    const obj  = {
+      name:"abc",
+      age:12,
+      print: ()=>{
+        console.log(this)
+      }
+    }
+  
+    obj.print(); // {}
+
+  ```
+
+* Arrow functions cannot be used as constructors
+
+* Arrow functions cannot be accessed before initialization
+
 
 
 
