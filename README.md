@@ -1,5 +1,74 @@
 ## React Interview
 
+
+### What is React?
+
+React is a JavaScript library developed by Facebook for building user interfaces, especially for single-page applications. It allows developers to create reusable UI components and manage the application state efficiently.
+
+### What are the key features of React?
+
+* Component-Based Architecture: UI is built using reusable components.
+
+* Virtual DOM: Improves performance by minimizing real DOM manipulations.
+
+* Unidirectional Data Flow: Data flows from parent to child components.
+
+* Declarative UI: You describe what you want to see, and React handles the rendering.
+
+  * You declare that "I want an `<h1>` element that says Hello and shows the name."
+You’re not manually creating DOM elements or handling updates — React does that behind the scenes. 
+
+    ```jsx
+    function Greeting({ name }) {
+      return <h1>Hello, {name}!</h1>;
+    }
+    ```
+
+* JSX Syntax: Combines JavaScript and HTML/XML-like syntax.
+
+* React Hooks (for functional components): Enable use of state and lifecycle methods.
+
+
+### What is JSX?
+
+JSX (JavaScript XML) is a syntax extension for JavaScript used in React. It allows you to write HTML-like code inside JavaScript, which is then transpiled to React.createElement() calls.
+
+### What are components in React?
+
+Components are reusable, independent pieces of UI. They can be: Difference between functional and class components?
+
+* Functional Components – simple functions that return JSX.
+* Class Components – ES6 classes that extend React.Component and have lifecycle methods.
+
+### Diff between ES6 and ES5 / ES6 (ECMAScript 2015) and ES5 (ECMAScript 2009)
+
+1. Variable Declarations
+
+```js
+// ES5
+var x = 10;
+
+// ES6
+let y = 20;
+const z = 30;
+```
+
+
+
+What is the virtual DOM and how does React use it?
+
+What are props in React?
+
+What is state in React?
+
+What is the difference between state and props?
+
+How do you handle events in React?
+
+
+
+
+
 ### Create React App
 
 ```bash
