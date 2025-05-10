@@ -628,7 +628,119 @@ A render prop is a technique where a component accepts a function as a prop, whi
 
 Render Props is a pattern where a component accepts a function as a prop, and calls it to render UI, giving it access to internal state or logic.
 
+## Role of tsconfig.json in React (with TypeScript)
 
+Compiler Configuration
+It specifies settings like:
+
+ECMAScript target version ("target": "ES6")
+
+Module system ("module": "ESNext")
+
+JSX support ("jsx": "react-jsx" or "react")
+
+Type Checking and Strictness
+Controls how strictly TypeScript checks your code with flags like:
+
+"strict": true (enables all strict type-checking options)
+
+"noImplicitAny", "strictNullChecks" etc.
+
+Path Aliases and Module Resolution
+You can define custom import paths (aliases), for example:
+
+```js
+"paths": {
+  "@components/*": ["src/components/*"]
+}
+
+```
+
+File Inclusion and Exclusion
+Specifies which files/directories to include or exclude in the build:
+
+```js
+"include": ["src"]
+"exclude": ["node_modules", "build"]
+
+```
+
+## Vite vs. Webpack
+
+| Feature       | Vite            | Webpack                  |
+| ------------- | --------------- | ------------------------ |
+| Startup Time  | Extremely fast  | Slower (bundles upfront) |
+| HMR Speed     | Very fast       | Slower                   |
+| Configuration | Simple defaults | Often complex            |
+| Build Tool    | Uses Rollup     | Uses Webpack itself      |
+
+
+## React Component Lifecycle (Functional with Hooks & Class-based)
+
+React recommends using functional components with hooks. Here's how lifecycle stages map to hooks:
+
+| Lifecycle Phase | Equivalent Hook(s)                            |
+| --------------- | --------------------------------------------- |
+| Mount           | `useEffect(() => { ... }, [])`                |
+| Update          | `useEffect(() => { ... }, [dependencies])`    |
+| Unmount         | `useEffect(() => { return () => {...} }, [])` |
+
+
+```js
+import { useEffect } from 'react';
+
+function MyComponent() {
+  useEffect(() => {
+    console.log('Component mounted');
+
+    return () => {
+      console.log('Component will unmount');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('Component updated');
+  }, [/* dependencies */]);
+
+  return <div>Hello</div>;
+}
+
+```
+
+
+## Class Components Lifecycle Methods
+
+* Mounting (when the component is inserted into the DOM):
+
+constructor()
+
+static getDerivedStateFromProps()
+
+render()
+
+componentDidMount()
+
+* Updating (when props or state change):
+
+static getDerivedStateFromProps()
+
+shouldComponentUpdate()
+
+render()
+
+getSnapshotBeforeUpdate()
+
+componentDidUpdate()
+
+* Unmounting (when component is removed from the DOM):
+
+componentWillUnmount()
+
+* Error Handling:
+
+componentDidCatch()
+
+getDerivedStateFromError()
 
 
 
