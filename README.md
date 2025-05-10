@@ -53,17 +53,587 @@ let y = 20;
 const z = 30;
 ```
 
+2. Arrow Functions
+
+```js
+// ES5
+var add = function(a, b) { return a + b; };
+
+// ES6
+const add = (a, b) => a + b;
+```
+
+3. Template Literals
+
+```js
+// ES5
+var name = "John";
+var greet = "Hello, " + name + "!";
+
+// ES6
+const greet = `Hello, ${name}!`;
+```
+
+4. Destructuring
+
+```js
+// ES5
+var person = { name: "Alice", age: 25 };
+var name = person.name;
+
+// ES6
+const { name, age } = person;
+```
+
+5. Classes
+
+```js
+// ES5
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.greet = function() {
+  return "Hi, " + this.name;
+};
+
+```
+
+6. Modules
+
+```js
+export const name = "App";
+import { name } from './module.js';
+```
+
+7. Promises
+
+```js
+// ES6
+fetch('/api')
+  .then(res => res.json())
+  .then(data => console.log(data));
+```
+
+### Iterators
+
+An iterator is any object that implements a .next() method which returns an object 
+
+```js
+const myIterable = {
+  data: ['a', 'b', 'c'],
+  index: 0,
+  next() {
+    if (this.index < this.data.length) {
+      return { value: this.data[this.index++], done: false };
+    } else {
+      return { done: true };
+    }
+  }
+};
+```
+
+### Generators Function
+
+A generator is a special type of function that can pause and resume its execution using the function* syntax and the yield keyword
+
+```js
+function* generatorFunc() {
+  yield 'a';
+  yield 'b';
+  yield 'c';
+}
+
+const gen = generatorFunc();
+
+console.log(gen.next()); // { value: 'a', done: false }
+console.log(gen.next()); // { value: 'b', done: false }
+console.log(gen.next()); // { value: 'c', done: false }
+console.log(gen.next()); // { value: undefined, done: true }
+```
+
+### Why use Generators?
+To create lazy sequences (generate data on-demand)
+
+To pause/resume functions
+
+Useful in asynchronous flows (especially before async/await)
+
+Cleaner iterators without manual state tracking
+
+## 5. Difference between Functional and Class Components
+
+| Feature             | Functional Component                          | Class Component                      |
+|---------------------|-----------------------------------------------|--------------------------------------|
+| **Syntax**          | Function                                      | ES6 Class                            |
+| **State**           | `useState` hook (since React 16.8)            | `this.state`                         |
+| **Lifecycle Methods** | `useEffect` and other hooks                | `componentDidMount`, etc.           |
+| **Simpler/Preferred** | Yes (modern React prefers hooks)            | Older approach                       |
 
 
-What is the virtual DOM and how does React use it?
 
-What are props in React?
 
-What is state in React?
 
-What is the difference between state and props?
+### What is the virtual DOM and how does React use it?
 
-How do you handle events in React?
+The virtual DOM is an in-memory representation of the real DOM. When a component’s state or props change, React:
+
+Updates the virtual DOM.
+
+Compares it with the previous version (diffing).
+
+Calculates the minimal set of changes.
+
+Updates the real DOM efficiently.
+
+### What are props in React?
+
+Props (short for "properties") are read-only inputs to components. They allow data to be passed from parent to child components.
+
+```js
+<Greeting name="Alice" />
+```
+
+### What is state in React?
+
+State is a built-in object that stores data that changes over time in a component. When the state changes, the component re-renders.
+
+```js
+const [count, setCount] = useState(0);
+```
+
+### 9. What is the difference between state and props?
+
+| Feature     | Props                               | State                                           |
+|-------------|--------------------------------------|--------------------------------------------------|
+| **Mutability** | Immutable                        | Mutable (via `setState` or `useState`)         |
+| **Ownership**  | Passed from parent               | Owned by the component itself                  |
+| **Usage**      | Data input                       | Local data handling                            |
+
+
+
+### How do you handle events in React?
+
+Events in React are handled using camelCase syntax and passing functions:
+
+```js
+function handleClick() {
+  alert('Button clicked');
+}
+
+<button onClick={handleClick}>Click me</button>
+```
+
+### What are hooks? Name a few commonly used hooks.
+
+Hooks are functions that let you use React features (like state and lifecycle methods) in functional components.
+
+Common hooks:
+
+* useState – for state management
+
+```js
+const [data, setData] = useState(null);
+```
+
+* useEffect – for side effects (e.g., fetching data)
+
+```js
+useEffect(()=>{
+
+},[dep]);
+```
+
+* useContext – to consume context
+
+useContext is a React Hook that allows you to access context data (like global state) without having to pass props manually at every level.
+
+When you have data (like theme, user info, or language) that needs to be accessible by many components deep in the component tree, passing props manually becomes messy. useContext solves that by letting you consume context directly.
+
+Steps to Use useContext
+
+* Create a context with React.createContext()
+
+* Provide the context using a <Context.Provider>
+
+* Consume the context using useContext(MyContext)
+
+Real world Example
+
+1. Create AuthContext 
+
+```jsx
+// AuthContext.js
+import React, { createContext, useState } from 'react';
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const login = (username) => setUser({ name: username });
+  const logout = () => setUser(null);
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+```
+2. Consume AuthContext in a Navbar
+
+```jsx
+// Navbar.js
+import React, { useContext } from 'react';
+import { AuthContext } from './AuthContext';
+
+const Navbar = () =>{
+
+  const {user, logout} = useContext(AuthContext);
+  return (
+    <nav>
+      <h1>MyApp</h1>
+      {user ? (
+        <>
+          <span>Welcome, {user.name}</span>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <span>Please log in</span>
+      )}
+    </nav>
+  );
+}
+export default Navbar;
+```
+
+3. Add Login Button in Another Component
+
+```jsx
+// LoginPage.js
+import React, { useContext } from 'react';
+import { AuthContext } from './AuthContext';
+
+const LoginPage = () => {
+  const { login } = useContext(AuthContext);
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <button onClick={() => login('JohnDoe')}>Login as JohnDoe</button>
+    </div>
+  );
+};
+
+export default LoginPage;
+```
+
+### What is the useEffect hook and how does it work?
+
+useEffect lets you perform side effects in function components (like componentDidMount, componentDidUpdate, componentWillUnmount combined).
+
+```js
+useEffect(() => {
+  // code runs on mount and/or when dependencies change
+  fetchData();
+
+  return () => {
+    // cleanup code (optional, runs on unmount)
+  };
+}, [dependencies]);
+```
+
+## What is the difference between `useEffect` and lifecycle methods?
+
+| Feature         | `useEffect`                              | `componentDidMount` / `componentDidUpdate`              |
+|----------------|-------------------------------------------|---------------------------------------------------------|
+| Component Type | Functional                                | Class                                                   |
+| Execution Time | After render                              | After render                                            |
+| Runs On        | Mount/update/unmount (based on deps)      | Mount or update                                         |
+| Cleanup Support| Yes (return function)                     | `componentWillUnmount`                                  |
+
+
+## How does React handle form inputs?
+
+React typically uses controlled components where input values are tied to component state:
+
+```jsx
+const [name, setName] = useState('');
+
+<input value={name} onChange={(e) => setName(e.target.value)} />
+```
+
+## What is lifting state up in React?
+
+Lifting state up means moving shared state to the nearest common ancestor so that multiple child components can access and modify it via props.
+
+In other word Lifting state up means putting shared data in a parent component so that multiple child components can use and change it by sending data through props.
+
+
+Example: A Switch component that toggles a light on/off. A Bulb component that lights up based on the switch state.
+
+They don’t know about each other, so we lift the isOn state up to a parent component.
+
+   LightController (holds state)
+      ├── Switch (toggles light)
+      └── Bulb (displays light on/off)
+
+```jsx
+// Switch.js
+function Switch({ isOn, toggle }) {
+  return (
+    <button onClick={toggle}>
+      {isOn ? 'Turn Off' : 'Turn On'}
+    </button>
+  );
+}
+
+```
+
+```jsx
+// Bulb.js
+function Bulb({ isOn }) {
+  return (
+    <div style={{
+      width: '100px',
+      height: '100px',
+      borderRadius: '50%',
+      background: isOn ? 'yellow' : '#ccc',
+      marginTop: '10px'
+    }} />
+  );
+}
+```
+
+```jsx
+// LightController.js
+import { useState } from 'react';
+import Switch from './Switch';
+import Bulb from './Bulb';
+
+export default function LightController() {
+  const [isOn, setIsOn] = useState(false);
+
+  const toggleLight = () => setIsOn(prev => !prev);
+
+  return (
+    <div>
+      <Switch isOn={isOn} toggle={toggleLight} />
+      <Bulb isOn={isOn} />
+    </div>
+  );
+}
+```
+
+## What are controlled and uncontrolled components?
+
+| Feature     | Controlled                              | Uncontrolled               |
+| ----------- | --------------------------------------- | -------------------------- |
+| Data Source | React state                             | DOM (via refs)             |
+| Updates     | Via `onChange` handlers                 | Direct DOM manipulation    |
+| Example     | `<input value={name} onChange={...} />` | `<input ref={inputRef} />` |
+
+
+## How do you optimize performance in a React app?
+
+* Memoization: React.memo, useMemo, useCallback
+
+* Code Splitting: React.lazy, Suspense
+
+* Avoid Re-renders: Key usage, state lifting, component structure
+
+* Virtualization: For large lists (react-window, react-virtualized)
+
+  Virtualization (in React) is a performance optimization technique used when rendering large lists or tables. Instead of rendering all items at once, it only renders the items visible on the screen (plus a few extra), saving memory and improving speed.
+
+  If you have 10,000 items, rendering all of them will slow down your app. But with virtualization, you only render maybe 30–40 at a time (what fits in the viewport), and as you scroll, new items are rendered and old ones are removed.
+
+  Tool
+
+  react-window: Lightweight and fast.
+
+    ```jsx
+    // App.js
+    import React from 'react';
+    import { FixedSizeList as List } from 'react-window';
+
+    const Row = ({ index, style }) => (
+      <div style={style}>Row {index}</div>
+    );
+
+    export default function App() {
+      return (
+        <List
+          height={300}         // height of the container
+          itemCount={1000}     // total items
+          itemSize={35}        // height of each item
+          width={300}          // width of the container
+        >
+          {Row}
+        </List>
+      );
+    }
+  ```
+  What happens: Only the rows visible inside the 300px container are rendered. As you scroll, new rows appear, old ones are removed from the DOM.
+
+  react-virtualized: More customizable and feature-rich (like tables, grids, etc.).
+
+* Efficient State Management: Avoid deep prop drilling, use context or external libraries like Redux
+
+## What are keys in React and why are they important in lists?
+
+Keys are unique identifiers used in lists to help React track items between renders.
+
+```jsx
+{items.map(item => <li key={item.id}>{item.name}</li>)}
+```
+
+Why important:
+
+Helps React identify which items changed, were added, or removed.
+
+Without keys, React may re-render unnecessarily or incorrectly.
+
+## What is reconciliation in React?
+
+Reconciliation is the process React uses to update the DOM efficiently when a component’s state or props change. React:
+
+Builds a new virtual DOM.
+
+Diffs it with the previous one.
+
+Updates only the parts of the real DOM that actually changed.
+
+## Explain React's diffing algorithm.
+
+React’s diffing algorithm (used during reconciliation) works on these principles:
+
+DOM elements of different types are replaced entirely (e.g., <div> vs <span>).
+
+Elements of the same type are updated in-place.
+
+Keys help identify elements in lists so React can track movement or updates.
+
+It uses a heuristic O(n) algorithm (not O(n²)) for performance.
+
+## What are React portals?
+
+Portals allow rendering a component outside its parent DOM hierarchy.
+
+React Portals allow you to render a component outside the main DOM hierarchy — like rendering a modal outside the root app element while keeping it connected to React’s state and events.
+
+Render a modal, tooltip, or dropdown above all content
+
+Avoid overflow: hidden or z-index issues
+
+Keep component logic inside React, but render outside #root
+
+## What is code splitting and how is it implemented in React?
+
+Code splitting allows you to load only the code needed at a given time, improving performance and load speed.
+
+```jsx
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+<React.Suspense fallback={<div>Loading...</div>}>
+  <MyComponent />
+</React.Suspense>
+```
+
+## What is memoization in React (React.memo, useMemo, useCallback)?
+
+Memoization caches results to avoid unnecessary recalculations or re-renders:
+
+React.memo(Component) – memoizes a whole component to prevent re-render unless props change.
+
+useMemo(() => value, [deps]) – memoizes a calculated value.
+
+useCallback(() => fn, [deps]) – memoizes a function reference.
+
+
+## useCallback in React — When and Why to Use It
+
+useCallback is a React Hook that memoizes a function, so it doesn't get re-created on every render — unless its dependencies change.
+
+```jsx
+const memoizedCallback = useCallback(() => {
+  // your logic here
+}, [dependencies]);
+```
+
+When to Use useCallback
+Use useCallback when:
+
+You pass functions as props to child components that are React.memo-ized.
+
+Function recreations are causing unnecessary re-renders.
+
+You're optimizing performance in large components or frequent renders.
+
+⚠️ When NOT to Use
+Don’t use it everywhere — unnecessary useCallback can make code slower and harder to read.
+
+Use it only when function identity matters (e.g., dependency array or component memoization).
+
+🧪 Example (Without useCallback causing re-renders)
+jsx
+Copy
+Edit
+const Parent = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => setCount(count + 1);
+
+  return (
+    <>
+      <button onClick={increment}>Increment</button>
+      <Child onClick={increment} />
+    </>
+  );
+};
+
+const Child = React.memo(({ onClick }) => {
+  console.log("Child rendered");
+  return <button onClick={onClick}>Child Button</button>;
+});
+Problem: Every render of Parent creates a new increment function → causes Child to re-render.
+
+✅ Fix with useCallback
+jsx
+Copy
+Edit
+const increment = useCallback(() => setCount(c => c + 1), []);
+Now increment keeps the same reference across renders (unless dependencies change), and Child doesn’t re-render unnecessarily.
+
+| Feature         | `useEffect`                           | `useCallback`                             |
+| --------------- | ------------------------------------- | ----------------------------------------- |
+| Type            | Side-effect hook                      | Memoization hook                          |
+| Runs on render? | Yes (after render)                    | No (only creates memoized function)       |
+| Common Use      | Data fetching, subscriptions, DOM ops | Optimizing callbacks, avoiding re-renders |
+| Output          | Nothing or cleanup function           | A memoized function                       |
+
+
+## What is React Fiber?
+React Fiber is the reimplementation of React’s core engine, enabling:
+
+Incremental rendering (splitting work into units)
+
+Prioritization of updates (e.g., input over animations)
+
+Better error handling, suspense, and concurrent mode
+
+## What are render props?
+
+A render prop is a technique where a component accepts a function as a prop, which returns a React element.
+
+Render Props is a pattern where a component accepts a function as a prop, and calls it to render UI, giving it access to internal state or logic.
+
+
+
+
+
+
+
 
 
 
