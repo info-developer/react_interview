@@ -1,6 +1,37 @@
 ## React Interview
 
 
+### Deprecated or Unsafe Lifecycle Methods
+
+1. componentWillMount()
+
+Deprecated as of React 16.3.
+
+Replaced with componentDidMount() or constructor logic.
+
+2. componentWillReceiveProps(nextProps)
+
+Deprecated as of React 16.3.
+
+Use static getDerivedStateFromProps() or rely on new props in componentDidUpdate().
+
+3. componentWillUpdate(nextProps, nextState)
+
+Deprecated as of React 16.3.
+
+Use getSnapshotBeforeUpdate() and componentDidUpdate() instead.
+
+These are now prefixed as UNSAFE_componentWillMount, UNSAFE_componentWillReceiveProps, etc., if you still use them.
+
+| Deprecated Method             | Use Instead                                            |
+| ----------------------------- | ------------------------------------------------------ |
+| `componentWillMount()`        | Constructor or `componentDidMount()`                   |
+| `componentWillReceiveProps()` | `static getDerivedStateFromProps()`                    |
+| `componentWillUpdate()`       | `getSnapshotBeforeUpdate()` and `componentDidUpdate()` |
+
+
+
+
 ### What is React?
 
 React is a JavaScript library developed by Facebook for building user interfaces, especially for single-page applications. It allows developers to create reusable UI components and manage the application state efficiently.
