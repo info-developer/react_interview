@@ -1,5 +1,65 @@
 # JAVASCRIPT
 
+
+Basic JavaScript Questions
+What is the difference between var, let, and const?
+
+What are primitive and non-primitive data types in JavaScript?
+
+What is hoisting in JavaScript?
+
+Explain the difference between == and ===.
+
+What is a closure? Can you give an example?
+
+What is the use of typeof and what are its limitations?
+
+What is event bubbling and how can it be stopped?
+
+🔹 Intermediate Level
+What are higher-order functions in JavaScript?
+
+What is the difference between call(), apply(), and bind()?
+
+What is the this keyword? How does it behave in different contexts?
+
+Explain the concept of promises and async/await.
+
+What is the event loop? How does JavaScript handle asynchronous code?
+
+What is a prototype chain?
+
+Difference between map(), filter(), reduce()?
+
+🔹 Advanced Concepts
+What are Web APIs and how do they interact with the JavaScript runtime?
+
+How does JavaScript handle memory management and garbage collection?
+
+What are modules in JavaScript? Difference between CommonJS and ES Modules?
+
+What is the difference between shallow copy and deep copy in JS?
+
+How does debouncing and throttling work in JavaScript?
+
+What is the purpose of Symbol in JavaScript?
+
+What are generators and how do they differ from regular functions?
+
+🔹 Code-Based Questions
+Write a function to flatten a nested array.
+
+Implement a debounce function.
+
+Deep clone an object.
+
+Check if a string is a palindrome.
+
+Implement a simple event emitter.
+
+
+
+
 ## ✅ What is Hoisting in JavaScript?
 
 Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (either function or global scope) before code execution.
