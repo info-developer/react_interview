@@ -1,4 +1,131 @@
-## JAVASCRIPT
+# JAVASCRIPT
+
+## ✅ What is Hoisting in JavaScript?
+
+Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope (either function or global scope) before code execution.
+
+In simple terms: You can use variables and functions before they’re declared in the code — but with some rules.
+
+Hoisting in JavaScript is a behavior where variable and function declarations are moved to the top of their scope before code execution. It allows variables and functions to be used before they are declared in the code. However, only declarations are hoisted, not initializations or assignments. 
+
+
+♻️ For var declarations, the variable is <u>hoisted and initialized with undefined</u>. If the variable is used before it is assigned a value, it will return undefined.
+
+    ```js
+    console.log(x); // Output: undefined
+    var x = 5;
+    ```
+
+
+♻️ For let and const declarations, <u>the variables are hoisted but not initialized.</u> If the variable is used before it is assigned a value, it will result in a ReferenceError.
+
+  ```js
+  console.log(y); // Output: ReferenceError: Cannot access 'y' before initialization
+  let y = 10;
+  ```
+
+♻️ Function declarations are fully hoisted, meaning both the declaration and the definition are moved to the top. This allows functions to be called before they are defined in the code. 
+
+  ```js
+  myFunction(); // Output: "Hello"
+  function myFunction() {
+    console.log("Hello");
+  }
+  ```
+
+♻️ Function expressions (especially with const or let) are not hoisted like declarations.
+
+  ```js
+  sayHello(); // TypeError: sayHello is not a function
+  const sayHello = function () {
+    console.log("Hello!");
+  };
+  ```
+
+
+## ✅ Primitive vs Non-Primitive Data Types in JavaScript
+
+### ♻️ Primitive Data Types
+These are immutable (cannot be changed) and hold single values. They are stored by value, meaning a copy of the value is assigned.
+
+Characteristics:
+
+* Immutable (can't change the actual value).
+
+* Compared by value.
+
+* Stored directly in the variable.
+
+  ```js
+  let a = 5;
+  let b = a;
+  b = 10;
+  console.log(a); // 5 (not affected)
+  ```
+
+### ♻️ Non-Primitive (Reference) Data Types
+These are mutable and hold collections or complex data. They are stored by reference, meaning variables store the memory address, not the actual value.
+
+Characteristics:
+
+* Mutable (can change the value).
+
+* Compared by reference.
+
+* Copied by reference.
+
+  ```js
+  let obj1 = { name: 'Alice' };
+  let obj2 = obj1;
+  obj2.name = 'Bob';
+  console.log(obj1.name); // 'Bob' (same reference)
+  ```
+
+## What is a Closure in JavaScript?
+A closure is a function that:
+* Remembers variables from the scope in which it was created,
+* Even after that outer scope has finished execution.
+
+A closure is created every time a function is defined — it captures variables from the surrounding scope so it can use them later, even after the outer function exits.
+
+  ```js
+  function outer() {
+    let count = 0;
+
+    return function inner() {
+      count++;
+      console.log(count);
+    };
+  }
+
+  const counter = outer();
+
+  counter(); // 1
+  counter(); // 2
+
+  ```
+
+  ```js
+  function secretNumber() {
+  let secret = 42;
+
+    return {
+      getSecret: () => secret,
+      setSecret: (newSecret) => { secret = newSecret; }
+    };
+  }
+
+  const mySecret = secretNumber();
+  console.log(mySecret.getSecret()); // 42
+  mySecret.setSecret(100);
+  console.log(mySecret.getSecret()); // 100
+```
+
+
+
+
+
+
 
 ### TypeScript - Interfaces (set of rules)
 
